@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Background change!"
+        android:id="@+id/changeColorButton1"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Now what is it?"
+        android:id="@+id/changeColorButton2"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="And this color is..."
+        android:id="@+id/changeColorButton3"/>
+
+</LinearLayout>
