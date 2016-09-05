@@ -5,8 +5,12 @@ package com.example;
  */
 public class CheckingAccount extends Account {
 
-    public CheckingAccount(long amount, MoneySaver owner) {
-        super(amount, owner);
+    public CheckingAccount(long amount) {
+        super(amount);
+    }
+
+    public String toString() {
+        return "Checking " + super.toString();
     }
 
     public void withdraw(long amount) {

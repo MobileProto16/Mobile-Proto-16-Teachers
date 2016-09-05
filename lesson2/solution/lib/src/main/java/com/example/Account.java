@@ -1,18 +1,16 @@
 package com.example;
 
 
-public class Account {
+public abstract class Account {
 
-    private MoneySaver owner;
     private long amount;
 
-    public Account(long amount, MoneySaver owner) {
+    public Account(long amount) {
         this.amount = amount;
-        this.owner = owner;
     }
 
     public String toString() {
-        return "Account owner: " + owner.getName() + ", Account Balance: $" + amount;
+        return "Account Balance: $" + amount;
     }
 
     public void deposit(long money) {
