@@ -5,10 +5,11 @@ package com.example;
  */
 public abstract class Animal {
 
-    private int legs, weight;
+    private int legs;
+    private double weight;
     private String name, color, species;
 
-    public Animal(int legs, int weight, String name, String color, String species) {
+    public Animal(int legs, double weight, String name, String color, String species) {
         this.legs = legs;
         this.weight = weight;
         this.name = name;
@@ -24,7 +25,7 @@ public abstract class Animal {
         this.legs = leg;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
