@@ -12,7 +12,7 @@ public class Cat extends Animal {
     }
 
     public void grow() {
-        this.setWeight((int)(this.getWeight() * 3));
+        this.setWeight(this.getWeight() * 3);
     }
 
 }

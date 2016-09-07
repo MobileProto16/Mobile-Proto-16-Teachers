@@ -12,7 +12,7 @@ public class Dog extends Animal {
     }
 
     public void grow() {
-        this.setWeight((int)(this.getWeight() * 1.5));
+        this.setWeight(this.getWeight() * 1.5);
     }
 
 }

@@ -19,6 +19,10 @@ public class Farm {
         this.animals.add(a);
     }
 
+    public Animal getAnimal(int i) {
+        return animals.get(i);
+    }
+
     public ArrayList<Animal> getHeaviestAnimals() {
         ArrayList<Animal> sorted = new ArrayList<>(animals);
         Collections.sort(sorted, new Comparator<Animal>() {
@@ -69,7 +73,8 @@ public class Farm {
         d.grow();
         cow.grow();
         System.out.println("Test 4 Passed: " + (c.getWeight() / old_weight_cat == 3));
-        System.out.println("Test 5 Passed: " + (Math.abs(((float)(d.getWeight()) / old_weight_dog - 1.5)) < 0.01));
+        System.out.println("Test 5 Passed: " +
+                (Math.abs(d.getWeight() / old_weight_dog - 1.5) < 0.01));
         System.out.println("Test 6 Passed: " + (cow.getWeight() / old_weight_cow == 5));
 
         Farm farm = new Farm();
@@ -81,8 +86,11 @@ public class Farm {
         for(int i = 0; i < sorted.size() - 1; i++) {
             System.out.println("Test " + (i + 7) + " Passed: " + (sorted.get(i).getWeight() > sorted.get(i + 1).getWeight()));
         }
-        c.setLeg(7);  // lol 6 legged cat
-        System.out.println("Test 9 Passed: " + (farm.averageLegs() == 5));
+        System.out.println("Test 9 Passed: " + (farm.getAnimal(0) == c));
+        System.out.println("Test 10 Passed: " + (farm.getAnimal(1) == d));
+        System.out.println("Test 11 Passed: " + (farm.getAnimal(2) == cow));
+        c.setLeg(7);  // lol 7 legged cat
+        System.out.println("Test 12 Passed: " + (farm.averageLegs() == 5));
 
         System.out.println("Printing 'Meowth'...");
         farm.printCatNames();

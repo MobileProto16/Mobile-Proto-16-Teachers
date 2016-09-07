@@ -12,7 +12,7 @@ public class Cow extends Animal {
     }
 
     public void grow() {
-        this.setWeight((int)(this.getWeight() * 5));
+        this.setWeight(this.getWeight() * 5);
     }
 
 }
