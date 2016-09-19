@@ -81,7 +81,6 @@ public class TodoDBHelper extends SQLiteOpenHelper {
         c.moveToFirst();
         while (!c.isAfterLast()){
             todoList.add(c.getString(1));
-            Log.d("read 1 todo", c.getString(1));
             c.moveToNext();
         }
         c.close();
