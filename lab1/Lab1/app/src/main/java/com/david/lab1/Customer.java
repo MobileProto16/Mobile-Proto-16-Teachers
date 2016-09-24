@@ -12,4 +12,8 @@ public class Customer {
         name = n;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }
