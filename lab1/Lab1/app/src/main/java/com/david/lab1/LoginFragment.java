@@ -30,7 +30,6 @@ public class LoginFragment extends Fragment {
         loginCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TAG", "customerlogin");
                 ((MainActivity) getActivity()).switchFragment(new CustomerLoginFragment());
             }
         });
