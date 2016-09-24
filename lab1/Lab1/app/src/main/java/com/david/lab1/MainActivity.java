@@ -2,14 +2,10 @@ package com.david.lab1;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,10 +14,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements s3LoadCustomersCallback {
 
     private ArrayList<Customer> customers;
     /**
@@ -31,35 +26,23 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient client;
     private S3Util s3util;
 
+    private static final String tag = MainActivity.class.getName();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        s3util = new S3Util(this, S3Credentials.identityPoolId);
-        customers = new ArrayList<>();
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
+        s3util = new S3Util(this, S3Credentials.COGNITO_POOL_ID);
+        loadCustomersFromS3();
         if (findViewById(R.id.fragment_container) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
                 return;
             }
-            // Create a new Fragment to be placed in the activity layout
             Fragment firstFragment = new LoginFragment();
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-//            firstFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, firstFragment).commit();
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -76,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Customer> getCustomers() {
         return customers;
+    }
+
+    public void loadCustomersFromS3() {
+        customers = new ArrayList<>();
+        s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this);
+    }
+
+    public void saveCustomersToS3() {
+        Log.d(tag, customers.toString());
+        s3util.saveObjectToS3(customers, S3Util.CUSTOMER_KEY);
     }
 
     @Override
@@ -134,5 +127,11 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    @Override
+    public void receiveCustomers(ArrayList<Customer> o) {
+        this.customers = o;
+        Log.d(tag, "Customers received: " + o);
     }
 }

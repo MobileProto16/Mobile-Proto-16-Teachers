@@ -23,6 +23,7 @@ public class CustomerLoginFragment extends Fragment {
     @BindView(R.id.backButton) Button back;
     @BindView(R.id.customerLogin) Button login;
     @BindView(R.id.editText) EditText name;
+    private static final String tag = CustomerLoginFragment.class.getName();
 
     private MainActivity myActivity;
     private ArrayList<Customer> customers;
@@ -39,6 +40,7 @@ public class CustomerLoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myActivity.goBack();
+                myActivity.saveCustomersToS3();
             }
         });
 
@@ -54,9 +56,8 @@ public class CustomerLoginFragment extends Fragment {
                 if (currentCustomer == null) {
                     currentCustomer = new Customer(typedText);
                     customers.add(currentCustomer);
-                    Log.d("TAG", "Creating customer");
-                } else {
-                    Log.d("TAG", "Using already existing customer");
+                    Log.d(tag, customers.toString());
+                    myActivity.saveCustomersToS3();
                 }
             }
         });
