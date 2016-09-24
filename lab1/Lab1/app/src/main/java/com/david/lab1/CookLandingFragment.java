@@ -34,6 +34,9 @@ public class CookLandingFragment extends Fragment {
         ButterKnife.bind(this, view);
         mainActivity = (MainActivity) getActivity();
 
+//        mainActivity.loadOrdersFromS3();
+        mainActivity.loadMenuItemsFromS3();
+
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

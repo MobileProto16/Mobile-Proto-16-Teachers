@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addMenuItem(com.david.lab1.MenuItem menuItem) {
         menuItems.add(menuItem);
+        saveMenuItemsToS3();
     }
 
     public ArrayList<com.david.lab1.MenuItem> getMenuItems() {
