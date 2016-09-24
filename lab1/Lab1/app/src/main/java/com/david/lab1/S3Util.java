@@ -26,7 +26,7 @@ import static java.io.File.createTempFile;
  * Created by david on 9/23/16.
  */
 
-class S3Util {
+public class S3Util {
 
     private TransferUtility transferUtility;
     private static final String BUCKET_NAME = "mobpro-lab1-bucket";
