@@ -3,7 +3,7 @@ package com.david.lab1;
 import java.util.ArrayList;
 
 /**
- * Created by david on 9/23/16.
+ * A MenuItem has a name and ingredients.
  */
 
 public class MenuItem {
@@ -24,6 +24,10 @@ public class MenuItem {
     }
 
     public String getName() {
+        return name;
+    }
+
+    public String toString() {
         return name;
     }
 
