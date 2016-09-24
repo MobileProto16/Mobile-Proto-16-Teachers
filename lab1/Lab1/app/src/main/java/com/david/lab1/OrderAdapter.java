@@ -35,7 +35,6 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         Order order = getItem(pos);
 
         orderItemTextView.setText(order.getItems().toString());
-        Log.d("WONG", order.getItems().toString());
         customerTextView.setText(order.getCustomer().getName());
 
         return convertView;
