@@ -19,7 +19,6 @@ public class CookOrdersFragment extends Fragment {
 
     @BindView(R.id.ordersListView) ListView ordersListView;
 
-    private ArrayList<Order> orderList;
     private OrderAdapter orderAdapter;
 
     public CookOrdersFragment() {
@@ -32,14 +31,7 @@ public class CookOrdersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cook_orders, container, false);
         ButterKnife.bind(this, view);
 
-        //TODO get this from S3 instead of pre-populating
-        orderList = new ArrayList<>();
-        Customer david = new Customer("David");
-        ArrayList<MenuItem> orderItems = new ArrayList<>();
-        orderItems.add(new MenuItem("Burger"));
-        orderItems.add(new MenuItem("Pizza"));
-        orderList.add(new Order(david, orderItems));
-
+        ArrayList<Order> orderList = ((MainActivity) getActivity()).getOrders();
         orderAdapter = new OrderAdapter(getContext(), orderList);
         ordersListView.setAdapter(orderAdapter);
 

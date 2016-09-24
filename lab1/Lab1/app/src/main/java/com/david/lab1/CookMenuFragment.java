@@ -27,8 +27,8 @@ public class CookMenuFragment extends Fragment {
     @BindView(R.id.addFAB) FloatingActionButton addFAB;
     @BindView(R.id.menuListView) ListView menuListView;
 
-    private ArrayList<MenuItem> menuList;
     private ArrayAdapter<MenuItem> menuAdapter;
+    private MainActivity mainActivity;
 
     public CookMenuFragment() {
     }
@@ -38,9 +38,9 @@ public class CookMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cook_menu, container, false);
         ButterKnife.bind(this, view);
+        mainActivity = (MainActivity) getActivity();
 
-        menuList = new ArrayList<>();
-        menuAdapter = new MenuAdapter(getContext(), menuList);
+        menuAdapter = new MenuAdapter(getContext(), mainActivity.getMenuItems());
         menuListView.setAdapter(menuAdapter);
 
         addFAB.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class CookMenuFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String text = input.getText().toString();
-                        menuList.add(new MenuItem(text));
+                        mainActivity.addMenuItem(new MenuItem(text));
                         menuAdapter.notifyDataSetChanged();
                     }
                 });
