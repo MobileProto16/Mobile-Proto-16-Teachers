@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 class MyLoadListener extends MyListener {
     private File f;
-    private s3LoadCustomersCallback slc;
+    private s3Callback slc;
     private static final String tag = MyLoadListener.class.getName();
 
-    MyLoadListener(File f, s3LoadCustomersCallback slc) {
+    MyLoadListener(File f, s3Callback slc) {
         this.f = f;
         this.slc = slc;
     }
@@ -29,7 +29,7 @@ class MyLoadListener extends MyListener {
                 FileInputStream fin = new FileInputStream(f);
                 ObjectInputStream ois = new ObjectInputStream(fin);
                 Object o = ois.readObject();
-                slc.receiveCustomers((ArrayList) o);
+                slc.receiveObjects((ArrayList) o);
             }
         } catch (IOException e) {} catch (ClassNotFoundException e) {}
     }

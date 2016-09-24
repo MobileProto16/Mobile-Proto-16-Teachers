@@ -26,4 +26,7 @@ public class Order implements Serializable {
     public Customer getCustomer() {
         return customer;
     }
+    public String toString() {
+        return "Order from " + customer.getName();
+    }
 }

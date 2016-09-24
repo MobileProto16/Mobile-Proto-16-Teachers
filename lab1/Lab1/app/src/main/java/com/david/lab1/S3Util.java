@@ -4,21 +4,16 @@ import android.content.Context;
 import android.util.Log;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 import static java.io.File.createTempFile;
 
@@ -32,6 +27,7 @@ public class S3Util {
     private static final String BUCKET_NAME = "mobpro-lab1-bucket";
     public static final String MENU_KEY = "bill-david-menu";
     public static final String CUSTOMER_KEY = "bill-david-uigiugui";
+    public static final String ORDER_KEY = "bill-david-orderkey23456789";
 
     private static final String tag = S3Util.class.getName();
 
@@ -71,7 +67,7 @@ public class S3Util {
         }
     }
 
-    public void loadObjectFromS3(String key, s3LoadCustomersCallback slc) {
+    public void loadObjectFromS3(String key, s3Callback slc) {
         // Sample usage: saveObjectToS3(menu_items_array_list, S3Util.MENU_KEY)
 
         Log.d(tag, "Loading from s3");
