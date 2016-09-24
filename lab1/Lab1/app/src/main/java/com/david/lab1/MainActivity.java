@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Customer> customers;
-    private ArrayList<com.david.lab1.MenuItem> menuItems;
-    private ArrayList<Order> orders;
+    private final ArrayList<Customer> customers = new ArrayList<>();
+    private final ArrayList<com.david.lab1.MenuItem> menuItems = new ArrayList<>();
+    private final ArrayList<Order> orders = new ArrayList<>();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private s3Callback orderCallback = new s3Callback() {
         @Override
         public void receiveObjects(ArrayList o) {
-            orders = o;
+            orders.clear();
+            orders.addAll(o);
             Log.d(tag, "Orders received: " + o);
         }
     };
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private s3Callback customerCallback = new s3Callback() {
         @Override
         public void receiveObjects(ArrayList o) {
-            customers = o;
+            customers.clear();
+            customers.addAll(o);
             Log.d(tag, "Customers received: " + o);
         }
     };
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private s3Callback menuItemCallback = new s3Callback() {
         @Override
         public void receiveObjects(ArrayList o) {
-            menuItems = o;
+            menuItems.clear();
+            menuItems.addAll(o);
             Log.d(tag, "Menu Items received: " + o);
         }
     };
@@ -93,17 +96,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadCustomersFromS3() {
-        customers = new ArrayList<>();
         s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this.customerCallback);
     }
 
     public void loadOrdersFromS3() {
-        orders = new ArrayList<>();
         s3util.loadObjectFromS3(S3Util.ORDER_KEY, this.orderCallback);
     }
 
     public void loadMenuItemsFromS3() {
-        orders = new ArrayList<>();
         s3util.loadObjectFromS3(S3Util.MENU_KEY, this.menuItemCallback);
     }
 

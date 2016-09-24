@@ -51,8 +51,8 @@ public class CustomerLoginFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_customer_login, container, false);
         ButterKnife.bind(this, v);
         myActivity = (MainActivity) getActivity();
+        myActivity.loadCustomersFromS3();
         customers = myActivity.getCustomers();
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
