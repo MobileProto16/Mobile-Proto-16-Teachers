@@ -9,4 +9,9 @@
     <string name="view_edit_menu">View/Edit Menu</string>
     <string name="see_orders">See Orders</string>
     <string name="back">Back</string>
+    <string name="menu">Menu</string>
+    <string name="new_menu_item">"New Menu Item: "</string>
+    <string name="name">Name</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 </resources>
