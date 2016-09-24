@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
         setContentView(R.layout.activity_main);
         s3util = new S3Util(this, S3Credentials.COGNITO_POOL_ID);
         loadCustomersFromS3();
+        saveCustomersToS3();
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
 
     public void loadCustomersFromS3() {
         customers = new ArrayList<>();
-        s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this);
+//        s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this);
     }
 
     public void saveCustomersToS3() {

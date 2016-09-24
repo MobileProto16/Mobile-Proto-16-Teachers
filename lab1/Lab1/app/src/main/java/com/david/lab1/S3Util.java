@@ -29,9 +29,9 @@ import static java.io.File.createTempFile;
 class S3Util {
 
     private TransferUtility transferUtility;
-    private static final String BUCKET_NAME = "mobile-proto-16";
+    private static final String BUCKET_NAME = "mobpro-lab1-bucket";
     public static final String MENU_KEY = "bill-david-menu";
-    public static final String CUSTOMER_KEY = "bill-david-cust";
+    public static final String CUSTOMER_KEY = "bill-david-uigiugui";
 
     private static final String tag = S3Util.class.getName();
 
