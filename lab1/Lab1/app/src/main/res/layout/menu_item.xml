@@ -8,7 +8,6 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:textSize="20sp"
-        android:id="@+id/textView"
-        android:text="poop" />
+        android:id="@+id/textView" />
 
 </LinearLayout>
