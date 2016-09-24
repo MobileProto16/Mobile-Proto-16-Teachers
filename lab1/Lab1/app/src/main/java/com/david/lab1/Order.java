@@ -2,13 +2,14 @@ package com.david.lab1;
 
 import android.view.Menu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * An order has an ArrayList of MenuItems and a Customer.
  */
 
-public class Order {
+public class Order implements Serializable {
 
     private Customer customer;
     private ArrayList<MenuItem> items;

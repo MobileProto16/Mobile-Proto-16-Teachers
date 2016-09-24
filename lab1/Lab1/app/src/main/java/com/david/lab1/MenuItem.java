@@ -1,12 +1,13 @@
 package com.david.lab1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A MenuItem has a name and ingredients.
  */
 
-public class MenuItem {
+public class MenuItem  implements Serializable {
 
     private ArrayList<String> ingredients;
     private String name;
