@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private S3Util s3util;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        s3util = new S3Util(this, S3Credentials.identityPoolId);
         customers = new ArrayList<>();
-
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, f);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void goBack() {
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     public ArrayList<Customer> getCustomers() {
