@@ -75,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, firstFragment).commit();
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-        orders = new ArrayList<>();
-        menuItems = new ArrayList<>();
     }
 
     public void switchFragment(Fragment f) {
@@ -112,23 +109,6 @@ public class MainActivity extends AppCompatActivity {
         s3util.saveObjectToS3(customers, S3Util.CUSTOMER_KEY);
     }
 
-<<<<<<< 4b06dd687633c42b8280c74197ee44b2ddcfb546
-    public void addOrder(Order order) {
-        orders.add(order);
-    }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
-
-
-    public void addMenuItem(com.david.lab1.MenuItem menuItem) {
-        menuItems.add(menuItem);
-    }
-
-    public ArrayList<com.david.lab1.MenuItem> getMenuItems() {
-        return menuItems;
-=======
     public void saveOrdersToS3() {
         Log.d(tag, orders.toString());
         s3util.saveObjectToS3(orders, S3Util.ORDER_KEY);
@@ -137,7 +117,22 @@ public class MainActivity extends AppCompatActivity {
     public void saveMenuItemsToS3() {
         Log.d(tag, menuItems.toString());
         s3util.saveObjectToS3(menuItems, S3Util.MENU_KEY);
->>>>>>> saving and loading utils
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void addMenuItem(com.david.lab1.MenuItem menuItem) {
+        menuItems.add(menuItem);
+    }
+
+    public ArrayList<com.david.lab1.MenuItem> getMenuItems() {
+        return menuItems;
     }
 
     @Override
