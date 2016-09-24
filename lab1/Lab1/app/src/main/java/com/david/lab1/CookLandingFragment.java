@@ -19,6 +19,7 @@ public class CookLandingFragment extends Fragment {
 
     @BindView(R.id.orderButton) Button orderButton;
     @BindView(R.id.menuButton) Button menuButton;
+    @BindView(R.id.backButton) Button backButton;
 
     private MainActivity mainActivity;
 
@@ -43,6 +44,12 @@ public class CookLandingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mainActivity.switchFragment(new CookMenuFragment());
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.goBack();
             }
         });
 
