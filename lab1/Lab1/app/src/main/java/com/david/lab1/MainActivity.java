@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements s3LoadCustomersCallback {
 
     private ArrayList<Customer> customers;
+    private ArrayList<Order> orders;
+    private ArrayList<com.david.lab1.MenuItem> menuItems;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
                     .add(R.id.fragment_container, firstFragment).commit();
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        orders = new ArrayList<>();
+        menuItems = new ArrayList<>();
     }
 
     public void switchFragment(Fragment f) {
@@ -70,6 +75,23 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
     public void saveCustomersToS3() {
         Log.d(tag, customers.toString());
         s3util.saveObjectToS3(customers, S3Util.CUSTOMER_KEY);
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+
+    public void addMenuItem(com.david.lab1.MenuItem menuItem) {
+        menuItems.add(menuItem);
+    }
+
+    public ArrayList<com.david.lab1.MenuItem> getMenuItems() {
+        return menuItems;
     }
 
     @Override
