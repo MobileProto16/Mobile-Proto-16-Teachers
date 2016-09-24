@@ -28,6 +28,24 @@ public class CustomerLoginFragment extends Fragment {
     private MainActivity myActivity;
     private ArrayList<Customer> customers;
 
+    private View.OnClickListener loginListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String typedText = name.getText().toString();
+            Customer currentCustomer = null;
+            for (Customer c : customers) {
+                if (c.getName().equalsIgnoreCase(typedText))
+                    currentCustomer = c;
+            }
+            if (currentCustomer == null) {
+                currentCustomer = new Customer(typedText);
+                customers.add(currentCustomer);
+                Log.d(tag, customers.toString());
+                myActivity.goBack();
+            }
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,23 +62,7 @@ public class CustomerLoginFragment extends Fragment {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String typedText = name.getText().toString();
-                Customer currentCustomer = null;
-                for (Customer c : customers) {
-                    if (c.getName().equalsIgnoreCase(typedText))
-                        currentCustomer = c;
-                }
-                if (currentCustomer == null) {
-                    currentCustomer = new Customer(typedText);
-                    customers.add(currentCustomer);
-                    Log.d(tag, customers.toString());
-                    myActivity.saveCustomersToS3();
-                }
-            }
-        });
+        login.setOnClickListener(loginListener);
 
         return v;
     }
