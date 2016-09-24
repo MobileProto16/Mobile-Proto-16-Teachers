@@ -18,4 +18,8 @@ public class Customer implements Serializable {
         return name;
     }
 
+    public String toString() {
+        return name;
+    }
+
 }

@@ -16,17 +16,41 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements s3LoadCustomersCallback {
+public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Customer> customers;
-    private ArrayList<Order> orders;
     private ArrayList<com.david.lab1.MenuItem> menuItems;
+    private ArrayList<Order> orders;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
     private S3Util s3util;
+
+    private s3Callback orderCallback = new s3Callback() {
+        @Override
+        public void receiveObjects(ArrayList o) {
+            orders = o;
+            Log.d(tag, "Orders received: " + o);
+        }
+    };
+
+    private s3Callback customerCallback = new s3Callback() {
+        @Override
+        public void receiveObjects(ArrayList o) {
+            customers = o;
+            Log.d(tag, "Customers received: " + o);
+        }
+    };
+
+    private s3Callback menuItemCallback = new s3Callback() {
+        @Override
+        public void receiveObjects(ArrayList o) {
+            menuItems = o;
+            Log.d(tag, "Menu Items received: " + o);
+        }
+    };
 
     private static final String tag = MainActivity.class.getName();
 
@@ -36,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
         setContentView(R.layout.activity_main);
         s3util = new S3Util(this, S3Credentials.COGNITO_POOL_ID);
         loadCustomersFromS3();
+//        loadMenuItemsFromS3();
+//        loadOrdersFromS3();
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -59,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
     }
 
     public void goBack() {
-        loadCustomersFromS3();
         getSupportFragmentManager().popBackStackImmediate();
     }
 
@@ -69,7 +94,17 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
 
     public void loadCustomersFromS3() {
         customers = new ArrayList<>();
-        s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this);
+        s3util.loadObjectFromS3(S3Util.CUSTOMER_KEY, this.customerCallback);
+    }
+
+    public void loadOrdersFromS3() {
+        orders = new ArrayList<>();
+        s3util.loadObjectFromS3(S3Util.ORDER_KEY, this.orderCallback);
+    }
+
+    public void loadMenuItemsFromS3() {
+        orders = new ArrayList<>();
+        s3util.loadObjectFromS3(S3Util.MENU_KEY, this.menuItemCallback);
     }
 
     public void saveCustomersToS3() {
@@ -77,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
         s3util.saveObjectToS3(customers, S3Util.CUSTOMER_KEY);
     }
 
+<<<<<<< 4b06dd687633c42b8280c74197ee44b2ddcfb546
     public void addOrder(Order order) {
         orders.add(order);
     }
@@ -92,6 +128,16 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
 
     public ArrayList<com.david.lab1.MenuItem> getMenuItems() {
         return menuItems;
+=======
+    public void saveOrdersToS3() {
+        Log.d(tag, orders.toString());
+        s3util.saveObjectToS3(orders, S3Util.ORDER_KEY);
+    }
+
+    public void saveMenuItemsToS3() {
+        Log.d(tag, menuItems.toString());
+        s3util.saveObjectToS3(menuItems, S3Util.MENU_KEY);
+>>>>>>> saving and loading utils
     }
 
     @Override
@@ -150,11 +196,5 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
-    }
-
-    @Override
-    public void receiveCustomers(ArrayList<Customer> o) {
-        this.customers = o;
-        Log.d(tag, "Customers received: " + o);
     }
 }
