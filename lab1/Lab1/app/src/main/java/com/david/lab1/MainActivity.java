@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements s3LoadCustomersCa
     }
 
     public void goBack() {
+        loadCustomersFromS3();
         getSupportFragmentManager().popBackStackImmediate();
     }
 

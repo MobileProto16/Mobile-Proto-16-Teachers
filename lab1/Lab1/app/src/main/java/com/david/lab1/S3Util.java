@@ -64,7 +64,7 @@ class S3Util {
                     key,    /* The key for the uploaded object */
                     f        /* The file where the data to upload exists */
             );
-            observer.setTransferListener(new MyObserver());
+            observer.setTransferListener(new MyListener());
             return true;
         } catch (IOException e) {
             return false;
@@ -82,60 +82,10 @@ class S3Util {
                     key,    /* The key for the object to download */
                     f        /* The file to download the object to */
             );
-            observer.setTransferListener(new MyLoadObserver(f, slc));
+            observer.setTransferListener(new MyLoadListener(f, slc));
         } catch (IOException e) {
         }
     }
 
-}
-
-class MyObserver implements TransferListener {
-    private static final String tag = MyObserver.class.getName();
-    MyObserver() {
-    }
-
-    @Override
-    public void onStateChanged(int id, TransferState state) {
-        Log.d(tag, "State Change");
-        Log.d(tag, state.toString());
-    }
-
-    @Override
-    public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-        Log.d(tag, "Progress Change");
-
-    }
-
-    @Override
-    public void onError(int id, Exception ex) {
-
-        Log.d(tag, "Error Change");
-        Log.d(tag, ex.toString());
-
-    }
-}
-
-class MyLoadObserver extends MyObserver {
-    private File f;
-    private s3LoadCustomersCallback slc;
-    private static final String tag = MyLoadObserver.class.getName();
-
-    MyLoadObserver(File f, s3LoadCustomersCallback slc) {
-        this.f = f;
-        this.slc = slc;
-    }
-
-    @Override
-    public void onStateChanged(int id, TransferState state) {
-        super.onStateChanged(id, state);
-        try {
-            if (state.toString().equalsIgnoreCase("completed")) {
-                FileInputStream fin = new FileInputStream(f);
-                ObjectInputStream ois = new ObjectInputStream(fin);
-                Object o = ois.readObject();
-                slc.receiveCustomers((ArrayList) o);
-            }
-        } catch (IOException e) {} catch (ClassNotFoundException e) {}
-    }
 }
 

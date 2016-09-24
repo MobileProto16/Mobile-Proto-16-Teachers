@@ -1,10 +1,12 @@
 package com.david.lab1;
 
+import java.io.Serializable;
+
 /**
  * Created by david on 9/23/16.
  */
 
-public class Customer {
+public class Customer implements Serializable {
 
     private String name;
 

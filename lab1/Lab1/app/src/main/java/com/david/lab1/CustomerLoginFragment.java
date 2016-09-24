@@ -40,9 +40,8 @@ public class CustomerLoginFragment extends Fragment {
             if (currentCustomer == null) {
                 currentCustomer = new Customer(typedText);
                 customers.add(currentCustomer);
-                Log.d(tag, customers.toString());
-                myActivity.goBack();
             }
+            myActivity.saveCustomersToS3();
         }
     };
 
@@ -58,7 +57,6 @@ public class CustomerLoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myActivity.goBack();
-                myActivity.saveCustomersToS3();
             }
         });
 
