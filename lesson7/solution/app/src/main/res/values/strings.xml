@@ -2,4 +2,5 @@
     <string name="app_name">homework</string>
     <string name="action_settings">Settings</string>
     <string name="search_stocks">Search stocks..</string>
+    <string name="enter_stock_ticker">Enter Stock Ticker</string>
 </resources>
